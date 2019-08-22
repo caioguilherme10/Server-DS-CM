@@ -3,7 +3,6 @@ import UserInterface from '../interfaces/User'
 import EnderecoSchema from './Endereco'
 
 const UserSchema = new Schema({
-    _id : String,
     nome: String,
     telefone: String,
     email: String,

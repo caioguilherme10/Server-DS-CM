@@ -1,6 +1,6 @@
 import * as express from 'express';
 import * as cors from 'cors';
-import mongoose from 'mongoose'
+import * as mongoose from 'mongoose'
 
 import routes from './routes'
 
@@ -24,7 +24,11 @@ class App {
     }
   
     private database (): void {
-      mongoose.connect(`mongodb://${process.env.DB_HOST}:27017/tsexample`, { useNewUrlParser: true })
+      mongoose.connect(`mongodb+srv://caioguilherme:caio0123@cluster0-jb0lq.mongodb.net/user?retryWrites=true&w=majority`, { useNewUrlParser: true }).then(() => {
+        console.info('Connected to Mongo.')
+      }).catch((err: any) => {
+        console.error(err)
+      })
     }
   
     private routes (): void {
