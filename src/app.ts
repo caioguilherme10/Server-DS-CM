@@ -2,12 +2,15 @@ import * as express from 'express'
 import * as cors from 'cors'
 import * as mongoose from 'mongoose'
 
-import routes from './routes'
+//import routes from './routes'
+import { RegisterRoutes } from './routes'
 
 import { requestLoggerMiddleware } from './request.logger.middleware'
 
+import * as swaggerUi from 'swagger-ui-express'
+
 class App {
-    public express: express.Application
+    public express: express.Express
   
     public constructor () {
       this.express = express()
@@ -32,7 +35,10 @@ class App {
     }
   
     private routes (): void {
-      this.express.use(routes)
+      //this.express.use(routes)
+      RegisterRoutes(this.express)
+      const swaggerDocument = require('../swagger.json')
+      this.express.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument))
     }
 }
   

@@ -1,0 +1,185 @@
+{
+	"basePath": "/",
+	"consumes": [
+		"application/json"
+	],
+	"definitions": {
+		"EnderecoInterfaceAbstraction": {
+			"properties": {
+				"rua": {
+					"type": "string"
+				},
+				"bairro": {
+					"type": "string"
+				},
+				"cidade": {
+					"type": "string"
+				}
+			},
+			"required": [
+				"rua",
+				"bairro",
+				"cidade"
+			],
+			"type": "object",
+			"additionalProperties": true
+		},
+		"UserInterfaceAbstraction": {
+			"properties": {
+				"_id": {
+					"type": "string"
+				},
+				"nome": {
+					"type": "string"
+				},
+				"telefone": {
+					"type": "string"
+				},
+				"email": {
+					"type": "string"
+				},
+				"datanascimento": {
+					"type": "string",
+					"format": "date-time"
+				},
+				"endereco": {
+					"$ref": "#/definitions/EnderecoInterfaceAbstraction"
+				}
+			},
+			"required": [
+				"_id",
+				"nome",
+				"telefone",
+				"email",
+				"datanascimento",
+				"endereco"
+			],
+			"type": "object",
+			"additionalProperties": true
+		}
+	},
+	"info": {
+		"title": "server",
+		"version": "1.0.0",
+		"license": {
+			"name": "ISC"
+		}
+	},
+	"paths": {
+		"/users": {
+			"get": {
+				"operationId": "BuscarTodos",
+				"produces": [
+					"application/json"
+				],
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"schema": {
+							"items": {
+								"$ref": "#/definitions/UserInterfaceAbstraction"
+							},
+							"type": "array"
+						}
+					}
+				},
+				"security": [],
+				"parameters": []
+			},
+			"post": {
+				"operationId": "Criar",
+				"produces": [
+					"application/json"
+				],
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"schema": {
+							"$ref": "#/definitions/UserInterfaceAbstraction"
+						}
+					}
+				},
+				"security": [],
+				"parameters": []
+			}
+		},
+		"/users/{id}": {
+			"put": {
+				"operationId": "Atualizar",
+				"produces": [
+					"application/json"
+				],
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"schema": {
+							"additionalProperties": true,
+							"type": "object"
+						}
+					}
+				},
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"type": "string"
+					}
+				]
+			},
+			"delete": {
+				"operationId": "Deletar",
+				"produces": [
+					"application/json"
+				],
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"schema": {
+							"additionalProperties": true,
+							"type": "object"
+						}
+					}
+				},
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"type": "string"
+					}
+				]
+			},
+			"get": {
+				"operationId": "BuscarPorID",
+				"produces": [
+					"application/json"
+				],
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"schema": {
+							"$ref": "#/definitions/UserInterfaceAbstraction"
+						}
+					}
+				},
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"type": "string"
+					}
+				]
+			}
+		}
+	},
+	"produces": [
+		"application/json"
+	],
+	"swagger": "2.0",
+	"securityDefinitions": {}
+}

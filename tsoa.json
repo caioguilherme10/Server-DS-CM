@@ -1,0 +1,17 @@
+{
+	"swagger": {
+		"outputDirectory": ".",
+        "entryFile": "./src/app.ts",
+        "controllerPathGlobs": [
+            "./src/controllers/UserController.ts"
+        ]
+	},
+	"routes": {
+		"basePath": "/",
+		"entryFile": "./src/app.ts",
+        "routesDir": "./src",
+        "controllerPathGlobs": [
+            "./src/controllers/UserController.ts"
+        ]
+	}
+}

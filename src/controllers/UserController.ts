@@ -1,45 +1,55 @@
-import { Request, Response } from 'express'
+//import { Request, Response } from 'express'
+import * as express from 'express';
 import { User } from '../schemas/User'
+//import UserInterface from '../interfaces/User'
+import { Controller, Route, Get, Post, Put, Delete, Body, Request} from 'tsoa'
 
-class UserController {
-    public async BuscarTodos (req: Request, res: Response): Promise<Response> {
-        const users = await User.find()
-    
-        return res.json(users)
-    }
+//import { Document } from 'mongoose'
 
-    public async criar (req: Request, res: Response): Promise<Response> {
-        const user = await User.create(req.body)
-
-        return res.json(user)
-    }
-
-    public async atualizar (req: Request, res: Response): Promise<Response> {
-        const { id } = req.params
-        try {
-            const result = await User.updateOne({ "_id" : id },req.body)
-            return res.json(result)
-        }catch (e){
-            return res.json(e)
-        }
-    }
-
-    public async deletar (req: Request, res: Response): Promise<Response> {
-        const { id } = req.params
-        try {
-            const result = await User.deleteOne({ "_id" : id })
-            return res.json(result)
-        }catch (e){
-            return res.json(e)
-        }
-    }
-
-    public async BuscarPorID (req: Request, res: Response): Promise<Response> {
-        const { id } = req.params
-        const user = await User.findById(id)
-
-        return res.json(user)
-    }
+interface EnderecoInterfaceAbstraction {
+    rua: string
+    bairro: string
+    cidade: string
 }
 
-export default new UserController()
+interface UserInterfaceAbstraction {
+    _id: string
+    nome: string
+    telefone: string
+    email: string
+    datanascimento: Date
+    endereco: EnderecoInterfaceAbstraction
+}
+
+@Route('/users')
+export class UserController extends Controller{
+    @Get()
+    public async BuscarTodos(): Promise<UserInterfaceAbstraction[]> {
+        const users = await User.find()
+        return users
+    }
+
+    @Post()
+    public async criar(@Request() request: express.Request): Promise<UserInterfaceAbstraction> {
+        const user = await User.create(request.body)
+        return user
+    }
+
+    @Put('/{id}')
+    public async atualizar(id: string,@Request() request: express.Request): Promise<any> {
+        const result = await User.updateOne({ "_id" : id },request.body)
+        return result
+    }
+
+    @Delete('/{id}')
+    public async deletar(id: string): Promise<any> {
+        const result = await User.deleteOne({ "_id" : id })    
+        return result
+    }
+
+    @Get('/{id}')
+    public async BuscarPorID(id: string): Promise<UserInterfaceAbstraction> {
+        const user = await User.findById(id)
+        return user
+    }
+}
