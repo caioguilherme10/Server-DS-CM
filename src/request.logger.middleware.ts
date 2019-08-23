@@ -1,4 +1,3 @@
-    
 import * as express from 'express'
 
 const requestLoggerMiddleware = (req: express.Request, resp: express.Response, next: express.NextFunction) => {

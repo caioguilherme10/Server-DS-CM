@@ -1,5 +1,5 @@
-import * as express from 'express';
-import * as cors from 'cors';
+import * as express from 'express'
+import * as cors from 'cors'
 import * as mongoose from 'mongoose'
 
 import routes from './routes'
