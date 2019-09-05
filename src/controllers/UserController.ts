@@ -18,7 +18,8 @@ interface UserInterfaceAbstraction {
     telefone: string
     email: string
     datanascimento: Date
-    endereco: EnderecoInterfaceAbstraction
+    endereco: EnderecoInterfaceAbstraction,
+    uid: string
 }
 
 @Route('/users')
@@ -27,6 +28,12 @@ export class UserController extends Controller{
     public async BuscarTodos(): Promise<UserInterfaceAbstraction[]> {
         const users = await User.find()
         return users
+    }
+
+    @Get('/login/{uid}')
+    public async Login(uid: string): Promise<UserInterfaceAbstraction[]> {
+        const user = await User.find({ "uid" : uid })
+        return user
     }
 
     @Post()

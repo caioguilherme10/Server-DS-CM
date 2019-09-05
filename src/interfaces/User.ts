@@ -7,7 +7,8 @@ interface UserInterface extends Document{
     telefone: string
     email: string
     datanascimento: Date
-    endereco: Endereco
+    endereco: Endereco,
+    uid: string
 }
 
 export default UserInterface

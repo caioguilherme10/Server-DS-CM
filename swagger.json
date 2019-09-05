@@ -44,6 +44,9 @@
 				},
 				"endereco": {
 					"$ref": "#/definitions/EnderecoInterfaceAbstraction"
+				},
+				"uid": {
+					"type": "string"
 				}
 			},
 			"required": [
@@ -52,7 +55,8 @@
 				"telefone",
 				"email",
 				"datanascimento",
-				"endereco"
+				"endereco",
+				"uid"
 			],
 			"type": "object",
 			"additionalProperties": true
@@ -101,6 +105,34 @@
 				},
 				"security": [],
 				"parameters": []
+			}
+		},
+		"/users/login/{uid}": {
+			"get": {
+				"operationId": "Login",
+				"produces": [
+					"application/json"
+				],
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"schema": {
+							"items": {
+								"$ref": "#/definitions/UserInterfaceAbstraction"
+							},
+							"type": "array"
+						}
+					}
+				},
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "uid",
+						"required": true,
+						"type": "string"
+					}
+				]
 			}
 		},
 		"/users/{id}": {

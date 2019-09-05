@@ -7,7 +7,8 @@ const UserSchema = new Schema({
     telefone: String,
     email: String,
     datanascimento: Date,
-    endereco: EnderecoSchema
+    endereco: EnderecoSchema,
+    uid: String
 }, {
     timestamps: true
 })
