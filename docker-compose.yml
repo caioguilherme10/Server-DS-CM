@@ -9,6 +9,7 @@ services:
       - "3333:3333"
     environment:
       - DB_HOST=database
+      - TOKEN_SECRET
     volumes:
       - ".:/usr/app"
 

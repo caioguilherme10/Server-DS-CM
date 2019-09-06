@@ -11,3 +11,7 @@ https://github.com/FaztTech/rest-api-typescript
 https://github.com/lukeautry/tsoa
 
 https://www.mongodb.com/
+
+https://github.com/auth0/node-jsonwebtoken
+
+

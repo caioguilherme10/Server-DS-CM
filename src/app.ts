@@ -28,7 +28,7 @@ class App {
   
     private database (): void {
       //mongoose.connect(`mongodb+srv://caioguilherme:caio0123@cluster0-jb0lq.mongodb.net/user?retryWrites=true&w=majority`, { useNewUrlParser: true })
-      mongoose.connect(`mongodb://${process.env.DB_HOST}:27017/tsexample`, { useNewUrlParser: true })
+      mongoose.connect(`mongodb://${process.env.DB_HOST}:27017/dscm`, { useNewUrlParser: true })
       .then(() => {
         console.info('Connected to Mongo.')
       }).catch((err: any) => {
