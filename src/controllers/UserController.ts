@@ -29,7 +29,7 @@ export class UserController extends Controller{
     @Security('api_token')
     @Get()
     public async BuscarTodos(): Promise<UserInterfaceAbstraction[]> {
-        const users = await User.find()
+        const users = await User.find().select({ uid: 0, _id: 0 })
         return users
     }
 

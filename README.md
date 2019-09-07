@@ -15,3 +15,6 @@ https://www.mongodb.com/
 https://github.com/auth0/node-jsonwebtoken
 
 
+Run 
+
+docker-compose up --build
