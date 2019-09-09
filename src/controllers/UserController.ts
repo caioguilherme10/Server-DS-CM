@@ -57,23 +57,23 @@ export class UserController extends Controller{
     }
 
     @Security('api_token')
-    @Put('/{id}')
-    public async atualizar(id: string,@Request() request: express.Request): Promise<any> {
-        const result = await User.updateOne({ "_id" : id },request.body)
+    @Put('/{uid}')
+    public async atualizar(uid: string,@Request() request: express.Request): Promise<any> {
+        const result = await User.updateOne({ "uid" : uid },request.body)
         return result
     }
 
     @Security('api_token')
-    @Delete('/{id}')
-    public async deletar(id: string): Promise<any> {
-        const result = await User.deleteOne({ "_id" : id })    
+    @Delete('/{uid}')
+    public async deletar(uid: string): Promise<any> {
+        const result = await User.deleteOne({ "uid" : uid })    
         return result
     }
 
     @Security('api_token')
-    @Get('/{id}')
-    public async BuscarPorID(id: string): Promise<UserInterfaceAbstraction> {
-        const user = await User.findById(id)
+    @Get('/{uid}')
+    public async BuscarPorID(uid: string): Promise<UserInterfaceAbstraction> {
+        const user = await User.findOne({ "uid" : uid })
         return user
     }
 }
